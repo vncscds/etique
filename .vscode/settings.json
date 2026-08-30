@@ -3,5 +3,13 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
-  }
+},
+"cSpell.words": [
+    "etique",
+    "ETIQUE",
+    "Etiquê",
+    "pressable",
+    "svgs",
+    "unpadded"
+]
 }

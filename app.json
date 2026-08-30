@@ -1,42 +1,64 @@
 {
   "expo": {
-    "name": "etique",
+    "name": "Etiquê",
     "slug": "etique",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./src/assets/app_logo.jpg",
     "scheme": "etique",
-    "userInterfaceStyle": "automatic",
+    "main": "expo-router/entry",
+    "backgroundColor": "#FFFFFF",
+    "userInterfaceStyle": "light",
     "ios": {
       "icon": "./assets/expo.icon"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./src/assets/app_logo.jpg",
+        "backgroundImage": "./src/assets/app_logo.jpg",
+        "monochromeImage": "./src/assets/app_logo.jpg"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "edgeToEdgeEnabled": true,
+      "package": "com.gonssalviz.etique",
+      "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./src/assets/app_logo.jpg"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "backgroundColor": "#FFC0CB",
+          "image": "./src/assets/app_logo.jpg",
+          "imageWidth": 76,
+          "resizeMode": "contain"
         }
-      ]
+      ],
+      "expo-status-bar",
+      "expo-font",
+      [
+        "expo-sqlite",
+        {
+          "useLibSQL": false
+        }
+      ],
+      "expo-image",
+      "react-native-edge-to-edge"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6ef063d6-a575-432b-91bf-d8e2d2d3a133"
+      }
     }
   }
 }

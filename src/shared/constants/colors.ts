@@ -1,0 +1,76 @@
+const MAIN_COLORS = {
+  ETIQUE: {
+    C1: '#FFC0CB',
+    C2: '#FF9FB3', // tom um pouco mais saturado, mesma lógica do C2 anterior
+    PROCESSING: '#FB7CB3', // mantido — cor semântica de "processando", não é cor de marca
+  },
+};
+
+const MAIN_COLORS_NEUTRAL = {
+  ETIQUE: {
+    C1: '#FFE4EA',
+    C2: '#FFF0F3',
+    C3: '#EBDDE0',
+    C4: '#ffeef1'
+  },
+};
+
+const NEUTRAL_COLORS = {
+  WHITE: '#FFFFFF',
+  C1: '#F5F5F5',
+  C2: '#E4E4E4',
+  C3: '#D3D3D3',
+  C4: '#BBBBBB',
+  C5: '#ACACAC',
+  C6: '#999999',
+  C7: '#6C6C6C',
+  C8: '#505050',
+  C9: '#333333',
+  C10: '#222222',
+  C11: '#0E0E0E',
+  BLACK: '#000000',
+  ETIQUE: '#FFF7F9'
+};
+
+const STATUS_COLORS = {
+  ERROR: '#E86868',
+  DELETE: '#FF3B30',
+  CLOSE: '#FF3B30',
+  WARNING: '#FA9626',
+  SUCCESS: '#008541',
+  PROCESSING: '#5CC5E9',
+  PROCESSING_NEUTRAL: NEUTRAL_COLORS.WHITE,
+  DISABLED: NEUTRAL_COLORS.C6,
+  ENABLED: MAIN_COLORS.ETIQUE.C1,
+};
+
+const BADGE_COLORS = {
+  NEUTRAL: {
+    INNER: NEUTRAL_COLORS.C6,
+    BACKGROUND: NEUTRAL_COLORS.C1,
+    BORDER: NEUTRAL_COLORS.C3,
+  },
+  DEFAULT: {
+    INNER: MAIN_COLORS.ETIQUE.C1,
+    BACKGROUND: '#FFEDF1',
+    BORDER: '#FFD0DA',
+  },
+  WARNING: {
+    INNER: STATUS_COLORS.WARNING,
+    BACKGROUND: '#FCF7E7',
+    BORDER: '#FFD79E',
+  },
+  SUCCESS: {
+    INNER: STATUS_COLORS.SUCCESS,
+    BACKGROUND: '#EBF9F1',
+    BORDER: '#C8F0D9',
+  },
+  ERROR: {
+    INNER: STATUS_COLORS.ERROR,
+    BACKGROUND: '#FBF5F3',
+    BORDER: '#FFD8D8',
+  },
+}
+
+export { BADGE_COLORS, MAIN_COLORS, MAIN_COLORS_NEUTRAL, NEUTRAL_COLORS, STATUS_COLORS };
+
