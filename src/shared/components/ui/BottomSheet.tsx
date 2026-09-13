@@ -8,9 +8,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 type BottomSheetModalProps<T = any> = Omit<GorhomBottomSheet.BottomSheetModalProps, 'children'> & {
   children?: React.ReactNode | ((props: { data?: T }) => React.ReactNode);
   ref?: React.Ref<GorhomBottomSheet.BottomSheetModal<T>>;
+  isDismissible?: boolean;
 };
 
-function BottomSheet<T = any>({ children, ref, ...props }: BottomSheetModalProps<T>) {
+function BottomSheet<T = any>({ children, ref, isDismissible = true, ...props }: BottomSheetModalProps<T>) {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = React.useState<boolean>(false);
   const snapPoints = React.useMemo(() => ['50%', '55%', '60%', '65%', '90%'], []);
   const bottomSheetRef = React.useRef<GorhomBottomSheet.BottomSheetModal<T> | null>(null);
@@ -26,10 +27,11 @@ function BottomSheet<T = any>({ children, ref, ...props }: BottomSheetModalProps
         appearsOnIndex={0}
         disappearsOnIndex={-1}
         opacity={.45}
+        pressBehavior={isDismissible ? 'close' : 'none'}
         {...backdropProps}
       />
     )
-  }, []);
+  }, [isDismissible]);
 
   const animations: Pick<GorhomBottomSheet.BottomSheetModalProps, 'animationConfigs' | 'animateOnMount'> = {
     animateOnMount: !disableAnimations,
@@ -42,9 +44,11 @@ function BottomSheet<T = any>({ children, ref, ...props }: BottomSheetModalProps
     topInset: insets.top,
     snapPoints: snapPoints,
     backdropComponent: renderBackdrop,
-    enablePanDownToClose: true,
+    enablePanDownToClose: isDismissible,
+    enableDismissOnClose: isDismissible,
+    enableOverDrag: isDismissible,
     enableDynamicSizing: false,
-    enableHandlePanningGesture: true,
+    enableHandlePanningGesture: isDismissible,
     enableBlurKeyboardOnGesture: false,
     android_keyboardInputMode: 'adjustPan',
     keyboardBehavior: 'extend',
@@ -57,7 +61,7 @@ function BottomSheet<T = any>({ children, ref, ...props }: BottomSheetModalProps
   useNavigationListeners({
     preventRemove: isBottomSheetOpen,
     onBeforeRemove: () => {
-      if (ref && 'current' in ref && isFunction(ref.current?.dismiss)) {
+      if (ref && 'current' in ref && isFunction(ref.current?.dismiss) && isDismissible) {
         ref.current.dismiss();
       }
     }
@@ -85,7 +89,7 @@ function BottomSheet<T = any>({ children, ref, ...props }: BottomSheetModalProps
     <GorhomBottomSheet.BottomSheetModal ref={bottomSheetRef} {...BottomSheetModal}>
       {children as any}
     </GorhomBottomSheet.BottomSheetModal>
-  )
+  );
 }
 
 export default BottomSheet;

@@ -19,6 +19,7 @@ export default function LoaderScreen() {
   ExpoRouter.useFocusEffect(React.useCallback(() => {
     (async () => {
       console.log('Pré-carregando rotas...')
+      ExpoRouter.router.prefetch('/(tabs)/cart')
       ExpoRouter.router.prefetch('/(tabs)/carts')
       ExpoRouter.router.prefetch('/(tabs)/home')
       ExpoRouter.router.prefetch('/(tabs)/shelves')

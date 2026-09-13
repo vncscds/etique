@@ -20,7 +20,7 @@ export default function useToast() {
             <Typography fontSize="xs" fontColor={Colors.NEUTRAL_COLORS.C5}>{props?.description}</Typography>
           </RN.View>
         </RN.View>,
-        { ...toastProps, id: 'custom' }
+        { id: 'custom', ...toastProps }
       );
     },
     error: (title: string, props?: Omit<Partial<ToastProps>, 'icon'> & { icon?: LucideIcon }) => {
@@ -35,7 +35,7 @@ export default function useToast() {
             <Typography fontSize="xs" fontColor={Colors.NEUTRAL_COLORS.C5} numberOfLines={3}>{props?.description}</Typography>
           </RN.View>
         </RN.View>,
-        { ...toastProps, id: 'error' }
+        { id: 'error', ...toastProps }
       );
     },
     success: (title: string, props?: Omit<Partial<ToastProps>, 'icon'> & { icon?: LucideIcon }) => {
@@ -50,7 +50,7 @@ export default function useToast() {
             <Typography fontSize="xs" fontColor={Colors.NEUTRAL_COLORS.C5} numberOfLines={3}>{props?.description}</Typography>
           </RN.View>
         </RN.View>,
-        { ...toastProps, id: 'success' }
+        { id: 'success', ...toastProps }
       );
     }
   }

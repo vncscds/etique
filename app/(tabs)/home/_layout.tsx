@@ -1,4 +1,5 @@
 import useCart from "@/modules/cart/hooks/useCart";
+import useExpenses from "@/modules/expenses/hooks/useExpenses";
 import SafeAreaView from "@/shared/components/layout/SafeAreaView";
 import Icon from "@/shared/components/ui/Icon";
 import Typography from "@/shared/components/ui/Typography";
@@ -10,6 +11,7 @@ import * as RN from 'react-native';
 export default function HomeLayout() {
   const cart = useCart();
   const router = useRouter();
+  const expenses = useExpenses();
 
   const handleOnPressCart = () => {
     if (!cart.isActive) {
@@ -41,7 +43,7 @@ export default function HomeLayout() {
                   <RN.View style={{ paddingTop: 46, paddingBottom: 84, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <RN.View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                       <Typography fontSize="xs" fontColor={Colors.MAIN_COLORS_NEUTRAL.ETIQUE.C1} fontFamily="Inter_500Medium" customStyle={{ letterSpacing: 2 }}>GASTOS</Typography>
-                      <Typography fontSize="5xl" fontFamily="Inter_700Bold" fontColor={Colors.MAIN_COLORS_NEUTRAL.ETIQUE.C2}>R$0,00</Typography>
+                      <Typography fontSize="5xl" fontFamily="Inter_700Bold" fontColor={Colors.MAIN_COLORS_NEUTRAL.ETIQUE.C2}>{expenses.expend}</Typography>
                       <RN.View style={{ flexDirection: 'row', gap: 4, alignItems: 'center' }}>
                         <CalendarHeartIcon strokeWidth={1.5} size={14} color={Colors.NEUTRAL_COLORS.WHITE} />
                         <Typography fontSize="xs" fontColor={Colors.MAIN_COLORS_NEUTRAL.ETIQUE.C1} fontFamily="Inter_500Medium">Este mês</Typography>

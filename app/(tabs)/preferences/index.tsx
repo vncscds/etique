@@ -1,16 +1,17 @@
+import useExpenses from "@/modules/expenses/hooks/useExpenses";
+import BottomSheetChangeName from "@/modules/preferences/components/BottomSheetChangeName";
 import usePreferences from "@/modules/preferences/hooks/usePreferences";
 import useToast from "@/shared/components/hooks/useToast";
 import Container from "@/shared/components/layout/Container";
-import Button from "@/shared/components/ui/Button";
 import Divider from "@/shared/components/ui/Divider";
 import Icon from "@/shared/components/ui/Icon";
 import Typography from "@/shared/components/ui/Typography";
 import { Colors } from "@/shared/constants";
 import cachePersister from "@/shared/lib/cache-persister";
-import { BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { router } from "expo-router";
 import * as ExpoUpdates from 'expo-updates';
-import { AlertTriangleIcon, ArrowLeftRightIcon, ChevronRightIcon, InfoIcon, LightbulbOffIcon, MoonStarIcon, PaletteIcon, TrashIcon, UserIcon, UserPenIcon } from "lucide-react-native";
+import { AlertTriangleIcon, ArrowLeftRightIcon, ChevronRightIcon, InfoIcon, LightbulbOffIcon, MoonStarIcon, PaletteIcon, TrashIcon, UserIcon, UserPenIcon, WalletIcon } from "lucide-react-native";
 import React from "react";
 import * as RN from "react-native";
 import { Alert } from "react-native";
@@ -20,8 +21,9 @@ export default function SettingsIndex() {
   const [name, setName] = React.useState('Usuário');
 
   const preferences = usePreferences();
+  const expenses = useExpenses();
 
-  const changeUsernameBottomSheetModalRef = React.useRef<BottomSheetModal | null>(null);
+  const changeNameBottomSheetRef = React.useRef<BottomSheetModal | null>(null);
 
   const toast = useToast();
   const dimensions = RN.useWindowDimensions();
@@ -50,8 +52,8 @@ export default function SettingsIndex() {
                 <Icon icon={UserIcon} iconSize="5xl" iconColor={Colors.BADGE_COLORS.DEFAULT.INNER} strokeWidth={1} />
               </RN.View>
               <RN.View style={{ alignItems: 'center' }}>
-                <Typography fontFamily="Inter_800ExtraBold" fontSize="2xl" customStyle={{ lineHeight: 26 }}>{name}</Typography>
-                <Typography fontSize="xs" fontColor={Colors.MAIN_COLORS.ETIQUE.C1}>@{name.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()}</Typography>
+                <Typography fontFamily="Inter_800ExtraBold" fontSize="2xl" customStyle={{ lineHeight: 26 }}>{preferences.get('username')}</Typography>
+                <Typography fontSize="xs" fontColor={Colors.MAIN_COLORS.ETIQUE.C1}>@{preferences.get('username').normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()}</Typography>
               </RN.View>
             </RN.View>
             <RN.View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', gap: 27 }}>
@@ -62,7 +64,7 @@ export default function SettingsIndex() {
                 </RN.View>
                 <RN.View style={{ minWidth: '100%', borderColor: Colors.BADGE_COLORS.DEFAULT.BORDER, gap: 16 }} >
                   <RN.Pressable style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} onPress={() => {
-                    changeUsernameBottomSheetModalRef.current?.present();
+                    changeNameBottomSheetRef.current?.present();
                   }}>
                     <Icon icon={UserPenIcon} iconSize="xl" iconColor={Colors.MAIN_COLORS.ETIQUE.C1} />
                     <Typography fontSize="sm">Alterar nome de usuário</Typography>
@@ -151,6 +153,15 @@ export default function SettingsIndex() {
               </RN.View>
               <RN.View style={{ minWidth: '100%', borderColor: Colors.BADGE_COLORS.DEFAULT.BORDER, gap: 16 }}>
                 <RN.Pressable style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} onPress={() => {
+                  expenses.addRandomExpensiveAmount()
+                }}>
+                  <Icon icon={WalletIcon} iconSize="xl" iconColor={Colors.MAIN_COLORS.ETIQUE.C1} />
+                  <Typography fontSize="sm">Adicionar R$ aleatório nos gastos</Typography>
+                </RN.Pressable>
+                <Divider />
+              </RN.View>
+              <RN.View style={{ minWidth: '100%', borderColor: Colors.BADGE_COLORS.DEFAULT.BORDER, gap: 16 }}>
+                <RN.Pressable style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} onPress={() => {
                   RN.Alert.alert('Olá!', 'Teste de alerta...')
                 }}>
                   <Icon icon={AlertTriangleIcon} iconSize="xl" iconColor={Colors.MAIN_COLORS.ETIQUE.C1} />
@@ -174,20 +185,7 @@ export default function SettingsIndex() {
           </RN.View>
         </RN.ScrollView>
       </Container>
-      <BottomSheetModal ref={changeUsernameBottomSheetModalRef}>
-        <BottomSheetScrollView contentContainerStyle={{ padding: 16 }}>
-          <Typography fontFamily="Inter_700Bold" fontSize="lg">Nome de usuário</Typography>
-          <Typography fontSize="sm" fontColor={Colors.NEUTRAL_COLORS.C5}>Alterar nome de usuário</Typography>
-          <RN.View style={{ paddingTop: 16 }}>
-            <Button buttonVariant="dashed" fontSize="sm" onPress={() => {
-              changeUsernameBottomSheetModalRef.current?.dismiss();
-              setName('John Doe')
-            }}>
-              Definir "John Doe"
-            </Button>
-          </RN.View>
-        </BottomSheetScrollView>
-      </BottomSheetModal>
+      <BottomSheetChangeName ref={changeNameBottomSheetRef} />
     </React.Fragment>
   )
 }

@@ -18,7 +18,7 @@ import { Toaster } from 'sonner-native';
 export const queryClient = new ReactQuery.QueryClient({
   defaultOptions: {
     queries: {
-      enabled: false,
+      enabled: true,
       staleTime: Calendar.ONE_MINUTE_IN_MILLISECONDS * 5,
       gcTime: Calendar.ONE_DAY_IN_MILLISECONDS
     }
@@ -80,12 +80,10 @@ export default function RootLayout() {
                 }}
               />
             </ExpoRouter.Stack>
-            <Toaster
-              duration={Calendar.ONE_SECOND_IN_MILLISECONDS * 3}
-            />
           </ReactQueryPersister.PersistQueryClientProvider>
         </ReactNativeSafeArea.SafeAreaProvider>
       </BottomSheetModalProvider>
+      <Toaster duration={Calendar.ONE_SECOND_IN_MILLISECONDS * 3} />
     </GestureHandlerRootView>
   )
 }

@@ -148,9 +148,8 @@ export default function CartsScreen() {
             <Button onPress={() => {
               cart.createNewCart({}, {
                 onSuccess: () => {
-                  router.prefetch('/(tabs)/cart')
-                  router.push('/(tabs)/cart');
                   bottomSheet.dismissAll();
+                  router.replace('/(tabs)/cart');
                 }
               });
             }}>
@@ -179,7 +178,7 @@ function CartsScreenHeader() {
         description: 'Um carrinho se encontra em aberto.'
       })
 
-      router.navigate('/(tabs)/cart')
+      router.navigate('/(tabs)/cart');
       return;
     }
 
@@ -192,7 +191,11 @@ function CartsScreenHeader() {
 
   const ActiveCartBanner = () => {
     if (!cart.isActive) {
-      return null;
+      return (
+        <Button buttonVariant="dashed" buttonIcon={PlusIcon} onPress={handleOnNewCartPress}>
+          Novo carrinho
+        </Button>
+      );
     }
 
     return (
@@ -201,6 +204,7 @@ function CartsScreenHeader() {
         title="Carrinho ativo"
         description="Toque aqui para acessar seu carrinho ativo."
         onPress={handleOnBannerPress}
+        opacity={.8}
       />
     );
   }
@@ -213,13 +217,7 @@ function CartsScreenHeader() {
           <Typography fontSize="xs" fontColor={Colors.NEUTRAL_COLORS.C6}>Todos os carrinhos criados serão listados aqui</Typography>
         </View>
         <View>
-          {
-            cart.isActive ? <ActiveCartBanner /> : (
-              <Button buttonVariant="dashed" buttonIcon={PlusIcon} onPress={handleOnNewCartPress}>
-                Novo carrinho
-              </Button>
-            )
-          }
+          <ActiveCartBanner />
         </View>
       </React.Fragment>
     )

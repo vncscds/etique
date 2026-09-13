@@ -11,9 +11,17 @@ type BannerProps = {
   icon?: LucideIcon;
   onPress?: () => void;
   dismiss?: boolean;
+  opacity?: RN.AnimatableNumericValue;
 }
 
-export default function Banner({ title, description, icon = AlertCircleIcon, onPress, dismiss = false }: BannerProps) {
+export default function Banner({
+  title,
+  description,
+  icon = AlertCircleIcon,
+  onPress,
+  dismiss = false,
+  opacity,
+}: BannerProps) {
   const [isVisible, setIsVisible] = React.useState(true);
 
   const handleOnDismiss = () => {
@@ -25,7 +33,7 @@ export default function Banner({ title, description, icon = AlertCircleIcon, onP
   }
 
   return (
-    <RN.Pressable style={({ pressed }) => [styles.container, { opacity: pressed ? .5 : 1 }]} onPress={onPress}>
+    <RN.Pressable style={({ pressed }) => [styles.container, { opacity: pressed ? .5 : 1 }, { opacity }]} onPress={onPress}>
       <RN.View style={styles.header}>
         <RN.View>
           <Icon icon={icon} iconColor={Colors.MAIN_COLORS.ETIQUE.C2} strokeWidth={2} iconSize="xl" />

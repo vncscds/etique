@@ -87,10 +87,10 @@ type WelcomeStepProps = {
 
 function WelcomeStep({ currStepIndex, title, description, buttonLabel, onPress, isVisible, svg: Svg, showPreviousButton, onPressPreviousButton, isPending }: WelcomeStepProps) {
   return (
-    <RN.View style={{ display: isVisible ? 'flex' : 'none', alignItems: 'center', maxWidth: '75%', justifyContent: 'center', gap: 32 }}>
+    <RN.View style={[welcomeStepStyle.container, { display: isVisible ? 'flex' : 'none' }]}>
       <RN.View style={{ alignItems: 'center' }}>
-        <RN.View style={{ backgroundColor: Colors.BADGE_COLORS.DEFAULT.BACKGROUND, paddingHorizontal: 13, paddingVertical: 4, borderRadius: 50, borderWidth: 2.5, borderColor: Colors.BADGE_COLORS.DEFAULT.BORDER }}>
-          <Typography fontSize="xl" fontColor={Colors.BADGE_COLORS.DEFAULT.INNER} fontFamily="Inter_700Bold">{currStepIndex}</Typography>
+        <RN.View style={welcomeStepStyle.stepContainer}>
+          <Typography fontSize="xl" fontColor={Colors.BADGE_COLORS.DEFAULT.INNER} fontFamily="Inter_700Bold" adjustsFontSizeToFit={true} >{currStepIndex}</Typography>
         </RN.View>
         <Typography fontFamily="Inter_700Bold" fontSize="3xl" fontColor={Colors.MAIN_COLORS.ETIQUE.C1}>{title}</Typography>
         <Typography fontSize="xs" customStyle={{ textAlign: 'center' }} fontColor={Colors.NEUTRAL_COLORS.C8}>{description}</Typography>
@@ -107,6 +107,25 @@ function WelcomeStep({ currStepIndex, title, description, buttonLabel, onPress, 
           </RN.Pressable>
         </RN.View>
       </RN.View>
-    </RN.View>
+    </RN.View >
   );
 }
+
+const welcomeStepStyle = RN.StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    maxWidth: '75%',
+    justifyContent: 'center',
+    gap: 32
+  },
+  stepContainer: {
+    backgroundColor: Colors.BADGE_COLORS.DEFAULT.BACKGROUND,
+    width: 36,
+    height: 36,
+    borderRadius: 50,
+    borderWidth: 2.5,
+    borderColor: Colors.BADGE_COLORS.DEFAULT.BORDER,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});

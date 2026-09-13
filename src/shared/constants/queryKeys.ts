@@ -9,8 +9,9 @@ function createQueryKey<T extends string>(baseKey: string, subKeys: readonly T[]
 
 const queryKeys = {
   auth: createQueryKey('auth', ['ME']),
-  cart: createQueryKey('cart', ['READ', 'LIST']),
-  preferences: createQueryKey('preferences', ['READ', 'UPDATE'])
+  cart: createQueryKey('cart', ['READ', 'LIST', 'LOG']),
+  preferences: createQueryKey('preferences', ['READ', 'UPDATE']),
+  expenses: createQueryKey('expenses', ['READ'])
 }
 
 export default queryKeys;

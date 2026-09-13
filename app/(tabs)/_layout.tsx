@@ -4,6 +4,7 @@ import { Colors } from "@/shared/constants";
 import { Tabs, useSegments } from "expo-router";
 import * as Lucide from 'lucide-react-native';
 import * as RN from "react-native";
+import { toast } from "sonner-native";
 
 export default function TabsLayout() {
   const segments = useSegments<'/preferences/animations'>();
@@ -16,6 +17,11 @@ export default function TabsLayout() {
     <Tabs
       key={disableAnimations ? 'without-anim' : 'with-anim'}
       backBehavior="history"
+      screenListeners={{
+        tabPress: () => {
+          toast.dismiss()
+        }
+      }}
       screenOptions={{
         animation: disableAnimations ? 'none' : 'shift',
         headerShown: false,
