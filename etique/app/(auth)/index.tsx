@@ -4,17 +4,10 @@ import Spinner from "@/shared/components/ui/Spinner";
 import Typography from "@/shared/components/ui/Typography";
 import { Colors } from "@/shared/constants";
 import { Redirect } from "expo-router";
-import React from "react";
 import { View } from "react-native";
 
 export default function AuthIndex() {
   const auth = useAuth();
-
-  const [presentation, setPresentation] = React.useState({
-    currPage: 1,
-    maxPage: 3
-  });
-
 
   if (auth.isPending) {
     return (

@@ -41,7 +41,7 @@ export default function BottomSheetChangeName({ ref }: BottomSheetChangeNameProp
 
   return (
     <BottomSheet ref={ref} snapPoints={['40%', '70%']} keyboardBehavior="extend" isDismissible={!preferences.isUpdating}>
-      <BottomSheetScrollView contentContainerStyle={{ padding: 16, gap: 16 }}>
+      <BottomSheetScrollView contentContainerStyle={{ padding: 16, gap: 16 }} keyboardShouldPersistTaps="handled">
         <RN.View>
           <Typography fontFamily="Inter_700Bold" fontSize="lg">Nome de usuário</Typography>
           <Typography fontSize="sm" fontColor={Colors.NEUTRAL_COLORS.C5}>Alterar nome de usuário</Typography>

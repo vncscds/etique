@@ -112,7 +112,7 @@ export default function SettingsIndex() {
                       <Typography fontSize="sm">Desativar animações</Typography>
                     </RN.View>
                     <RN.View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 4 }}>
-                      <Typography fontSize="sm" fontFamily="Inter_600SemiBold" fontColor={Colors.MAIN_COLORS.ETIQUE.C1}>{preferences.value.disableAnimations ? 'Sim' : 'Não'}</Typography>
+                      <Typography fontSize="sm" fontFamily="Inter_600SemiBold" fontColor={Colors.MAIN_COLORS.ETIQUE.C1}>{preferences.get('disableAnimations') ? 'Sim' : 'Não'}</Typography>
                       <Icon icon={ChevronRightIcon} iconColor={Colors.NEUTRAL_COLORS.C6} />
                     </RN.View>
                   </RN.Pressable>

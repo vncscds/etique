@@ -5,7 +5,7 @@ import Icon from "@/shared/components/ui/Icon";
 import Typography from "@/shared/components/ui/Typography";
 import { Colors } from "@/shared/constants";
 import { Stack, useRouter } from "expo-router";
-import { CalendarHeartIcon, LucideIcon, MenuIcon, ShoppingCartIcon, UserIcon } from "lucide-react-native";
+import { CalendarHeartIcon, LucideIcon, MenuIcon, ReceiptTextIcon, ShoppingCartIcon, UserIcon } from "lucide-react-native";
 import * as RN from 'react-native';
 
 export default function HomeLayout() {
@@ -34,8 +34,9 @@ export default function HomeLayout() {
               return (
                 <RN.View style={headerStyle.container}>
                   <RN.View style={headerStyle.actionsContainer}>
-                    <Icon icon={MenuIcon} iconSize="3xl" iconColor={Colors.NEUTRAL_COLORS.WHITE} />
+                    <Action icon={MenuIcon} onPress={() => router.navigate('/preferences')} />
                     <RN.View style={headerStyle.rightActions}>
+                      <Action icon={ReceiptTextIcon} onPress={() => { }} />
                       <Action icon={ShoppingCartIcon} onPress={handleOnPressCart} />
                       <Action icon={UserIcon} onPress={() => { }} />
                     </RN.View>
@@ -89,7 +90,7 @@ const headerStyle = RN.StyleSheet.create({
   },
   rightActions: {
     flexDirection: 'row',
-    gap: 16,
+    gap: 20,
     alignItems: 'center'
   },
 })

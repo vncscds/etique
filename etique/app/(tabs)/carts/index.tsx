@@ -13,6 +13,7 @@ import Icon from "@/shared/components/ui/Icon";
 import List from "@/shared/components/ui/List";
 import Typography from "@/shared/components/ui/Typography";
 import { Colors } from "@/shared/constants";
+import useSearch from "@/shared/hooks/useSearch";
 import { BottomSheetModal, BottomSheetScrollView, BottomSheetTextInput, useBottomSheetModal } from "@gorhom/bottom-sheet";
 import { ListRenderItemInfo } from "@shopify/flash-list";
 import dayjs from "dayjs";
@@ -20,7 +21,7 @@ import { router, useRouter } from "expo-router";
 import { CalendarPlusIcon, CalendarSyncIcon, CheckCircle2, MoreVerticalIcon, PlusIcon, ShoppingCartIcon, XCircleIcon } from "lucide-react-native";
 import { get } from "radashi";
 import React, { useRef } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable, TextInput, View } from "react-native";
 
 export default function CartsScreen() {
   const cart = useCart();
@@ -103,12 +104,17 @@ export default function CartsScreen() {
     );
   }
 
+  const { query, setQuery } = useSearch([{ id: 1, text: 'Compras' }, { id: 2, text: 'Frutas' }], ['text']);
+
   return (
     <React.Fragment>
       <Container customStyle={{
         gap: 16
       }}>
         <CartsScreenHeader />
+        
+        <TextInput value={query} onChangeText={setQuery} placeholder="Pesquisar aqui..." />
+
         <List
           key={carts.data.length}
           data={carts.data}
@@ -211,15 +217,9 @@ function CartsScreenHeader() {
 
   if (carts.data.length > 0) {
     return (
-      <React.Fragment>
-        <View>
-          <Typography fontSize="base" fontFamily="Inter_700Bold">Carrinhos criados</Typography>
-          <Typography fontSize="xs" fontColor={Colors.NEUTRAL_COLORS.C6}>Todos os carrinhos criados serão listados aqui</Typography>
-        </View>
         <View>
           <ActiveCartBanner />
         </View>
-      </React.Fragment>
-    )
+    );
   }
 }
