@@ -9,8 +9,8 @@ type RadioButtonProps = {
   disabled?: boolean;
 }
 
-const OUTER_SIZE = 20
-const INNER_SIZE = 10
+const OUTER_SIZE = 20;
+const INNER_SIZE = 10;
 
 export default function RadioButton({ isChecked, label, onPress, disabled = false }: RadioButtonProps) {
   return (
@@ -29,7 +29,7 @@ export default function RadioButton({ isChecked, label, onPress, disabled = fals
       </View>
       <Typography fontSize="sm">{label}</Typography>
     </Pressable>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

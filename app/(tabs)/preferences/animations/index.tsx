@@ -12,13 +12,6 @@ export default function AnimationsScreen() {
   const preferences = usePreferences();
   const disableAnimations = preferences.get('disableAnimations');
 
-  // React.useEffect(() => {
-  //   router.prefetch('/(auth)');
-  //   router.prefetch('/(tabs)');
-  //   router.prefetch('/(tabs)/carts');
-  //   router.prefetch('/(tabs)/shelves');
-  // }, [disableAnimations]);
-
   return (
     <React.Fragment>
       <Modal isVisible={preferences.isUpdating} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.MAIN_COLORS.ETIQUE.C1 }} backdropColor={'rgba(0,0,0,.1)'}>
